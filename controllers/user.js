@@ -12,9 +12,11 @@ exports.getLogin = (req, res) => {
     if (req.user) {
         return res.redirect('/');
     }
+    const endSurveyLink = req.query.end;
     res.render('account/login', {
         title: 'Login',
-        site_picture: process.env.SITE_PICTURE
+        site_picture: process.env.SITE_PICTURE,
+        endSurveyLink: endSurveyLink
     });
 };
 
@@ -64,15 +66,24 @@ exports.postLogin = (req, res, next) => {
  * GET /logout
  * Handles user log out.
  */
-exports.logout = (req, res) => {
-    req.logout((err) => {
-        if (err) console.log('Error : Failed to logout.', err);
-        req.session.destroy((err) => {
-            if (err) console.log('Error : Failed to destroy the session during logout.', err);
-            req.user = null;
-            res.redirect('/');
+exports.logout = async(req, res) => {
+    try {
+        const user = await User.findById(req.user.id).exec();
+        const endSurveyLink = user.endSurveyLink;
+        user.active = false;
+        await user.save();
+
+        req.logout((err) => {
+            if (err) console.log('Error : Failed to logout.', err);
+            req.session.destroy((err) => {
+                if (err) console.log('Error : Failed to destroy the session during logout.', err);
+                req.user = null;
+                res.redirect(`/login?end=${endSurveyLink}`);
+            });
         });
-    });
+    } catch (err) {
+        next(err);
+    }
 };
 
 /**
@@ -106,7 +117,7 @@ exports.postSignup = async(req, res, next) => {
     try {
         const existingUser = await User.findOne({ $or: [{ email: req.body.email }, { mturkID: req.body.mturkID }] }).exec();
         if (existingUser) {
-            req.flash('errors', { msg: 'An account with that email address or MTurkID already exists.' });
+            req.flash('errors', { msg: 'An account with that email address or SONA ID already exists.' });
             return res.redirect('/signup');
         }
         /*###############################
@@ -116,7 +127,7 @@ exports.postSignup = async(req, res, next) => {
         const experimentalConditionNames = process.env.EXP_CONDITIONS_NAMES.split(",");
         const experimentalCondition = experimentalConditionNames[Math.floor(Math.random() * numConditions)];
 
-        const surveyLink = process.env.POST_SURVEY ? process.env.POST_SURVEY + req.body.mturkID : "";
+        const surveyLink = process.env.POST_SURVEY;
         const currDate = Date.now();
         const user = new User({
             email: req.body.email,
@@ -127,7 +138,7 @@ exports.postSignup = async(req, res, next) => {
             endSurveyLink: surveyLink,
             active: true,
             lastNotifyVisit: currDate,
-            createdAt: currDate
+            createdaT: currDate
         });
         await user.save();
         req.logIn(user, (err) => {
@@ -137,7 +148,7 @@ exports.postSignup = async(req, res, next) => {
             const userAgent = req.headers['user-agent'];
             const user_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
             user.logUser(currDate, userAgent, user_ip);
-            res.redirect('/account/signup_info');
+            res.redirect('/com');
         });
     } catch (err) {
         next(err);
@@ -160,7 +171,7 @@ exports.postSignupInfo = async(req, res, next) => {
 
         await user.save();
         req.flash('success', { msg: 'Profile information has been updated.' });
-        return res.redirect('/com');
+        return res.redirect('/info');
     } catch (err) {
         next(err);
     }

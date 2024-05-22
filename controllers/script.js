@@ -118,7 +118,7 @@ exports.newPost = async(req, res) => {
             await user.save();
             res.redirect('/');
         } else {
-            req.flash('errors', { msg: 'ERROR: Your post did not get sent. Please include a photo and a caption.' });
+            req.flash('errors', { msg: 'ERROR: Your post did not get sent. You forgot to submit a photo. Please try again.' });
             res.redirect('/');
         }
     } catch (err) {

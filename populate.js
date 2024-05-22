@@ -201,6 +201,61 @@ async function doPopulate() {
             );
         });
         /*************************
+        Creates inline comments for each post
+        Looks up actors and posts to insert the correct comment
+        Does this in series to insure comments are put in the correct order
+        Takes a while to run because of this.
+        *************************/
+    }).then(function(result) {
+        console.log(color_start, "Starting to populate post replies...");
+        return new Promise((resolve, reject) => {
+            async.eachSeries(comment_list, async function(new_reply, callback) {
+                    const act = await Actor.findOne({ username: new_reply.actor }).exec();
+                    if (act) {
+                        const pr = await Script.findOne({ postID: new_reply.postID }).exec();
+                        if (pr) {
+                            const comment_detail = {
+                                commentID: new_reply.id,
+                                body: new_reply.body,
+                                likes: getLikesComment(),
+                                actor: act,
+                                time: timeStringToNum(new_reply.time),
+                                class: new_reply.class
+                            };
+
+                            pr.comments.push(comment_detail);
+                            pr.comments.sort(function(a, b) { return a.time - b.time; });
+
+                            try {
+                                await pr.save();
+                            } catch (err) {
+                                console.log(color_error, "ERROR: Something went wrong with saving reply in database");
+                                next(err);
+                            }
+                        } else { //Else no post found
+                            console.log(color_error, "ERROR: Post not found in database");
+                            callback();
+                        }
+
+                    } else { //Else no actor found
+                        console.log(color_error, "ERROR: Actor not found in database");
+                        callback();
+                    }
+                },
+                function(err) {
+                    if (err) {
+                        console.log(color_error, "ERROR: Something went wrong with saving replies in database");
+                        callback(err);
+                    }
+                    // Return response
+                    console.log(color_success, "All replies added to database!");
+                    mongoose.connection.close();
+                    resolve('Promise is resolved successfully.');
+                    return 'Loaded Replies';
+                }
+            );
+        });
+         /*************************
         Creates each notification(replies) and uploads it to the DB
         Actors must be in DB first to add them correctly to the post
         *************************/
@@ -291,62 +346,6 @@ async function doPopulate() {
                     return 'Loaded Notifications';
                 }
             );
-        });
-        /*************************
-        Creates inline comments for each post
-        Looks up actors and posts to insert the correct comment
-        Does this in series to insure comments are put in the correct order
-        Takes a while to run because of this.
-        *************************/
-    }).then(function(result) {
-        console.log(color_start, "Starting to populate post replies...");
-        return new Promise((resolve, reject) => {
-            async.eachSeries(comment_list, async function(new_reply, callback) {
-                    const act = await Actor.findOne({ username: new_reply.actor }).exec();
-                    if (act) {
-                        const pr = await Script.findOne({ postID: new_reply.postID }).exec();
-                        if (pr) {
-                            const comment_detail = {
-                                commentID: new_reply.id,
-                                body: new_reply.body,
-                                likes: getLikesComment(),
-                                actor: act,
-                                time: timeStringToNum(new_reply.time),
-                                class: new_reply.class
-                            };
-
-                            pr.comments.push(comment_detail);
-                            pr.comments.sort(function(a, b) { return a.time - b.time; });
-
-                            try {
-                                await pr.save();
-                            } catch (err) {
-                                console.log(color_error, "ERROR: Something went wrong with saving reply in database");
-                                next(err);
-                            }
-                        } else { //Else no post found
-                            console.log(color_error, "ERROR: Post not found in database");
-                            callback();
-                        }
-
-                    } else { //Else no actor found
-                        console.log(color_error, "ERROR: Actor not found in database");
-                        callback();
-                    }
-                },
-                function(err) {
-                    if (err) {
-                        console.log(color_error, "ERROR: Something went wrong with saving replies in database");
-                        callback(err);
-                    }
-                    // Return response
-                    console.log(color_success, "All replies added to database!");
-                    mongoose.connection.close();
-                    resolve('Promise is resolved successfully.');
-                    return 'Loaded Replies';
-                }
-            );
-
         });
     })
 }

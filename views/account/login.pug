@@ -1,6 +1,16 @@
 extends ../ui_layout
 
 block content
+  if endSurveyLink
+    .sixteen.wide.column
+      .ui.info.message
+        .content
+          .header
+            | Please go to the survey.
+          ul.list
+            li To earn your SONA credit, you should complete the survey 
+              a(href=endSurveyLink, style="text-decoration: underline; color: red;") HERE
+              | .
   .computer.only.tablet.only.eight.wide.column
     img.ui.fluid.image(src=process.env.SITE_PICTURE)
 

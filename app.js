@@ -195,7 +195,11 @@ app.get('/info', passportConfig.isAuthenticated, function(req, res) {
         title: 'User Docs'
     });
 });
-
+app.get('/end', passportConfig.isAuthenticated, function(req, res) {
+    res.render('end', {
+        title: 'End Session'
+    });
+}); 
 app.get('/tos', function(req, res) { res.render('tos', { title: 'Terms of Service' }); });
 
 app.get('/completed', passportConfig.isAuthenticated, userController.userTestResults);

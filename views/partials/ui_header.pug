@@ -25,12 +25,13 @@
             .left.menu
               if user.consent
                 a.item(href='/me') My Profile
-                a.item(href='/account') Update My Profile
+                a.item(href='/end') End My Session
+                //-a.item(href='/account') Update My Profile
                 if user.isAdmin
                   a.item(href='/completed') Study Progress
                   a.item(href='/actors') Simulation (Actors)
-                a.item(href='/com') View Community Rules
-              a.item.logoutLink Log Out
+                a.item(href='/info') View Information Page
+              //-a.item.logoutLink Log Out
 .mobile.only.row
   .ui.fluid.top.fixed.four.item.menu
     a.item(href=user===undefined ? '/' : (user.consent ? "/": "#"))
@@ -57,9 +58,10 @@
         .left.menu
           if user.consent
             a.item(href='/me') My Profile
-            a.item(href='/account') Update My Profile
+            a.item(href='/end') End My Session
+            //-a.item(href='/account') Update My Profile
             if user.isAdmin
               a.item(href='/completed') Study Progress
               a.item(href='/actors') Simulation (Actors)
             a.item(href='/com') View Community Rules
-          a.item.logoutLink Log Out
+          //-a.item.logoutLink Log Out

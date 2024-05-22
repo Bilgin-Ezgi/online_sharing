@@ -1,0 +1,20 @@
+extends ui_layout
+
+block content
+  .ui.text.container(style="margin-top: 2em; margin-bottom: 2em")
+    
+    
+    p If you have created two posts, you can end your session and continue to take a survey. 
+    p If you have not done so already, please go back and create two posts.
+    p To receive your SONA credit, you must complete the survey. 
+    
+
+    
+      .ui.big.green.labeled.icon.button.info
+          i.rocket.icon
+          |   Go to the survey
+  
+  script.
+    $('.ui.big.green.labeled.icon.button.info').on('click', function() {
+        window.location.href='/logout'; 
+      });

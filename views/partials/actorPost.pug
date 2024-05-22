@@ -18,11 +18,11 @@
   .content
     .description=val.body
     .myTimer.hidden 0
-  .ui.bottom.three.attached.icon.buttons
+  .ui.bottom.two.attached.icon.buttons
     .ui.reply.button(tabindex='0')
       i.reply.icon
       |  Reply
-    .ui.flag.button(tabindex='0')
+    //-ui.flag.button(tabindex='0')
       i.flag.icon
       |  Flag
     .ui.labeled.button(tabindex='0')
@@ -69,7 +69,7 @@
                 .text=comment.body
                 .actions
                   a.like.comment(class=comment.liked ? "red" : null ) !{comment.liked ? "Unlike" : "Like"}
-                  a.flag.comment Flag
+                  //-a.flag.comment Flag
   .extra.content
     .ui.fluid.left.labeled.right.icon.input
       .ui.label

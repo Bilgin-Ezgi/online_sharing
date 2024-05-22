@@ -2,29 +2,33 @@ extends ui_layout
 
 block content
   .ui.text.container(style="margin-top: 2em; margin-bottom: 2em")
-    h2(style="text-align: center;") Community Rules for EatSnap.Love
-    p We are so glad you are here to eat, snap and love along with us! Before you get started, please review our community rules. These rules help foster a friendly and fun community. Please note that this is not a comprehensive list. Our moderators reserve the right to remove anything we deem inappropriate.
+    h2(style="text-align: center;") Welcome to Memento
+    p Memento is a new social media platform where you can share your important moments and connect with others. 
 
-    p Remember if you encounter anything in the following list, be sure to <b>Flag It 🚩</b> so our moderators can investigate and help out.
+      h3 Here is what you can do on the site.  
+    ul
+        li Fill out your profile and add as many details as you would like others to know about you.
+        li Check who else is around. Like or reply to others’ posts. 
+        li Create new posts.
+       
+    p Before you get started, please review our community rules. These rules help foster a friendly community. Please note that this is not a comprehensive list. Our moderators reserve the right to remove anything we deem inappropriate.
 
-    h3 No SPAM (unless it's in a can!)
-    p This is not the place to sell your services or promote your brand. SPAM will be deleted when found.
 
     h3 No Personal Attacks and Bullying
-    p Zero tolerance on this! EatSnap.Love is a place to to share our snaps and our love, not to tear each other down. 
+    p Zero tolerance on this! Memento is a place to to share our important moments, not to tear each other down. 
 
-    h3 No Racism, sexism, and other discrimination
+    h3 No Racism, Sexism, and Other Discrimination
     p Attacking entire classes of people is just like attacking a single person: we'll ban you for it.
 
-    h3 No NSFW material
+    h3 No NSFW Material
     p If you wouldn't show your boss, don't show it here! 
 
     if !user.consent
       .ui.big.green.labeled.icon.button.info
           i.rocket.icon
-          |   Got it!
+          |   Got it! Continue to fill out my profile
   
   script.
     $('.ui.big.green.labeled.icon.button.info').on('click', function() {
-        window.location.href = '/info';
+        window.location.href = '/account/signup_info';
       });
