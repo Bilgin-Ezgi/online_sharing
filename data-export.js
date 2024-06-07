@@ -52,20 +52,23 @@ async function getDataExport() {
         { id: 'NumUserPostsCreated', title: 'NumUserPostsCreated' },
         { id: 'NumUserCommentsCreated', title: 'NumUserCommentsCreated' },
         { id: 'NumActorPostsLiked', title: 'NumActorPostsLiked' },
-        { id: 'NumActorPostsFlagged', title: 'NumActorPostsFlagged' },
+       // { id: 'NumActorPostsFlagged', title: 'NumActorPostsFlagged' },
         { id: 'NumActorCommentsLiked', title: 'NumActorCommentsLiked' },
-        { id: 'NumActorCommentsFlagged', title: 'NumActorCommentsFlagged' },
+       // { id: 'NumActorCommentsFlagged', title: 'NumActorCommentsFlagged' },
         { id: 'UserPostsCreated', title: 'UserPostsCreated' },
+        { id: 'PhotoName', title: 'PhotoName'},
         { id: 'UserCommentsCreated', title: 'UserCommentsCreated' },
         { id: 'ActorPostsLiked', title: 'ActorPostsLiked' },
-        { id: 'ActorPostsFlagged', title: 'ActorPostsFlagged' },
+       // { id: 'ActorPostsFlagged', title: 'ActorPostsFlagged' },
         { id: 'ActorCommentsLiked', title: 'ActorCommentsLiked' },
-        { id: 'ActorCommentsFlagged', title: 'ActorCommentsFlagged' },
-        { id: 'ActorsBlocked', title: 'ActorsBlocked' },
-        { id: 'ActorsReported', title: 'ActorsReported' },
+       // { id: 'ActorCommentsFlagged', title: 'ActorCommentsFlagged' },
+       // { id: 'ActorsBlocked', title: 'ActorsBlocked' },
+       // { id: 'ActorsReported', title: 'ActorsReported' },
         { id: 'ActorsFollowed', title: 'ActorsFollowed' },
         { id: 'TimeOnSite', title: 'TimeOnSite' },
-        { id: 'PageLog', title: 'PageLog' }
+        { id: 'PageLog', title: 'PageLog' },
+        { id: 'profile', title: 'profile'}, 
+
     ];
     const csvWriter = createCsvWriter({
         path: outputFilepath,
@@ -80,34 +83,41 @@ async function getDataExport() {
         record.Condition = user.group;
 
         let userPostsCreated = "";
+        let photoNameCreated = "";
         for (const userPost of user.posts) {
-            let string = userPost.body + ", on Day " + (Math.floor(userPost.relativeTime / 86400000) + 1) + "\r\n";
+            let string = userPost.body + (userPost.picture ? " w/ PHOTO: " + userPost.picture : "") + ", on Day " + (Math.floor(userPost.relativeTime / 86400000) + 1) + "\r\n";
+            let string_photo = userPost.picture + "\r\n"; 
             userPostsCreated += string;
+            photoNameCreated += string_photo;
         }
         record.NumUserPostsCreated = user.posts.length;
         record.UserPostsCreated = userPostsCreated;
+        record.PhotoName = photoNameCreated;
 
         let NumActorPostsLiked = 0,
-            NumActorPostsFlagged = 0,
+          //  NumActorPostsFlagged = 0,
             NumUserCommentsCreated = 0,
-            NumActorCommentsLiked = 0,
-            NumActorCommentsFlagged = 0;
+            NumActorCommentsLiked = 0;
+           // NumActorCommentsFlagged = [];
         let ActorPostsLiked = [],
-            ActorPostsFlagged = [],
-            ActorCommentsLiked = [],
-            ActorCommentsFlagged = [];
+           // ActorPostsFlagged = [],
+            ActorCommentsLiked = [];
+           // ActorCommentsFlagged = [];
         let UserCommentsCreated = "";
 
         //For each post (feedAction)
         for (const feedAction of user.feedAction) {
+            if (feedAction.post == null) {
+                continue;
+            }
             if (feedAction.liked) {
                 NumActorPostsLiked++;
                 ActorPostsLiked.push(feedAction.post.postID);
             }
-            if (feedAction.flagged) {
-                NumActorPostsFlagged++;
-                ActorPostsFlagged.push(feedAction.post.postID);
-            }
+            //if (feedAction.flagged) {
+            //    NumActorPostsFlagged++;
+           //     ActorPostsFlagged.push(feedAction.post.postID);
+           // }
 
             const NewComments = feedAction.comments.filter(comment => comment.new_comment);
             NumUserCommentsCreated += NewComments.length;
@@ -118,42 +128,45 @@ async function getDataExport() {
 
             const CommentsLiked_list = feedAction.comments.filter(comment => !comment.new_comment && comment.liked);
             NumActorCommentsLiked += CommentsLiked_list.length;
-            for (const likedComment of CommentsLiked_list) {
-                ActorCommentsLiked.push(feedAction.post.comments.find(comment => likedComment.comment.equals(comment._id)).commentID);
+            if (NumActorCommentsLiked > 0){
+                for (const likedComment of CommentsLiked_list) {
+                    ActorCommentsLiked.push(feedAction.post.comments.find(comment => likedComment.comment.equals(comment._id)).commentID);
+                }
             }
 
-            const CommentsFlagged_list = feedAction.comments.filter(comment => !comment.new_comment && comment.flagged);
-            NumActorCommentsFlagged += CommentsFlagged_list.length;
-            for (const flaggedComment of CommentsFlagged_list) {
-                ActorCommentsFlagged.push(feedAction.post.comments.find(comment => flaggedComment.comment.equals(comment._id)).commentID);
-            }
+            //const CommentsFlagged_list = feedAction.comments.filter(comment => !comment.new_comment && comment.flagged);
+           // NumActorCommentsFlagged += CommentsFlagged_list.length;
+           // for (const flaggedComment of CommentsFlagged_list) {
+           //     ActorCommentsFlagged.push(feedAction.post.comments.find(comment => flaggedComment.comment.equals(comment._id)).commentID);
+           // }
         }
 
         record.NumUserCommentsCreated = NumUserCommentsCreated;
         record.NumActorPostsLiked = NumActorPostsLiked;
-        record.NumActorPostsFlagged = NumActorPostsFlagged;
+        //record.NumActorPostsFlagged = NumActorPostsFlagged;
         record.NumActorCommentsLiked = NumActorCommentsLiked;
-        record.NumActorCommentsFlagged = NumActorCommentsFlagged;
+       // record.NumActorCommentsFlagged = NumActorCommentsFlagged;
         record.UserCommentsCreated = UserCommentsCreated;
         record.ActorPostsLiked = ActorPostsLiked;
-        record.ActorPostsFlagged = ActorPostsFlagged;
+        //record.ActorPostsFlagged = ActorPostsFlagged;
         record.ActorCommentsLiked = ActorCommentsLiked;
-        record.ActorCommentsFlagged = ActorCommentsFlagged;
+       // record.ActorCommentsFlagged = ActorCommentsFlagged;
 
-        record.ActorsBlocked = user.blocked;
+        //record.ActorsBlocked = user.blocked;
         record.ActorsFollowed = user.followed;
 
-        let actorsReported = "";
-        for (const reportedActor of user.reported) {
-            const reportLogs = user.blockReportAndFollowLog.filter(log => log.action == 'report' && log.actorName == reportedActor);
-            for (const reportReason of reportLogs) {
-                actorsReported += reportedActor + ", Reported for " + reportReason.report_issue + "\r\n";
-            }
-        }
-        record.ActorsReported = actorsReported;
+        //let actorsReported = "";
+       // for (const reportedActor of user.reported) {
+       //     const reportLogs = user.blockReportAndFollowLog.filter(log => log.action == 'report' && log.actorName == reportedActor);
+       //     for (const reportReason of reportLogs) {
+       //         actorsReported += reportedActor + ", Reported for " + reportReason.report_issue + "\r\n";
+       //     }
+        // }
+       // record.ActorsReported = actorsReported;
 
         record.TimeOnSite = user.pageTimes.reduce((sum, time) => sum + time);
         record.PageLog = user.pageLog.map(pageLog => pageLog.page);
+        record.profile = user.profile;
 
         console.log(record);
         records.push(record);
