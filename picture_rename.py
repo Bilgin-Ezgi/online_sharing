@@ -4,8 +4,7 @@ import shutil
 
 def get_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--folder', help='Path to images', default='./uploads/user_post')
-
+    parser.add_argument('--folder', help='Path to images to rename', default='./uploads/user_post')
     return parser.parse_args()
 
 if __name__ == '__main__':
