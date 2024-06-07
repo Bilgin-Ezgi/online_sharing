@@ -18,7 +18,6 @@ if __name__ == '__main__':
 
     print(f'New Directory is {new_folder}')
 
-
     os.makedirs(new_folder, exist_ok=True)
 
     filelist = os.listdir(args.folder)
@@ -28,8 +27,6 @@ if __name__ == '__main__':
     for filename in filelist:
         name, ext = filename.rsplit('_', 1)
         new_filename = f'{name}.{ext}'
-
-        print(os.path.join(args.folder, filename), os.path.join(new_folder, new_filename))
-
+        print(f'Old file: {os.path.join(args.folder, filename)}, New File: {os.path.join(new_folder, new_filename)}')
         shutil.copy(os.path.join(args.folder, filename), os.path.join(new_folder, new_filename))
         
