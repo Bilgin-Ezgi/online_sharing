@@ -33,17 +33,12 @@ block content
     
   .ui.tiny.post.modal
     i.close.icon
-    .header Create a post about an important event that you experienced and photographed in the past week. It should be a specific one-time event that occurred at a particular time and place. Describe the event in as much detail as possible. Upload a photo of the event to the post and click on Share.  
+    .header Create a post about an important event that you experienced and photographed in the past week. It should be a specific one-time event that occurred at a particular time and place. Describe the event in as much detail as possible.  
     .scrolling.content
       form#postform.ui.feed.form(action='/post/new', method='POST', enctype='multipart/form-data')
         input(type='hidden', name='_csrf', value=_csrf)
         .field
           textarea(rows='8', placeholder='Type here', name='body')
-        .field.image-upload
-          label(for='picinput')
-            .image.content
-              img#imgInp.ui.fluid.image(src='/public/photo-camera.svg')
-          input#picinput(type='file', accept='image/*', name='picinput')
     .actions
       input.ui.green.button(type='submit', form='postform', value='Share')
           
