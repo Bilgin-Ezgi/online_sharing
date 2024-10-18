@@ -2,7 +2,7 @@
   .ui.borderless.fixed.menu
     .ui.container
       a.item(href= user===undefined ? '/' : (user.consent ? "/": "#"))
-        img.ui.tiny.image(src=process.env.SITE_LOGO, id='logo')
+        img.ui.tiny.image(src=process.env.SITE_LOGO, id='logo', style="width: 90px; height: auto;")
       .right.menu
         if !user
           a.item(href='/login') Log In
@@ -25,12 +25,12 @@
             .left.menu
               if user.consent
                 a.item(href='/me') My Profile
+                a.item(href='/account') Update My Profile
                 a.item(href='/end') End My Session
-                //-a.item(href='/account') Update My Profile
                 if user.isAdmin
                   a.item(href='/completed') Study Progress
                   a.item(href='/actors') Simulation (Actors)
-                a.item(href='/info') View Information Page
+                a.item(href='/info') View Instructions
               //-a.item.logoutLink Log Out
 .mobile.only.row
   .ui.fluid.top.fixed.four.item.menu
@@ -59,7 +59,7 @@
           if user.consent
             a.item(href='/me') My Profile
             a.item(href='/end') End My Session
-            //-a.item(href='/account') Update My Profile
+            a.item(href='/account') Update My Profile
             if user.isAdmin
               a.item(href='/completed') Study Progress
               a.item(href='/actors') Simulation (Actors)

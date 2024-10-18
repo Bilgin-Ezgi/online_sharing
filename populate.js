@@ -129,7 +129,6 @@ async function doPopulate() {
                             name: actor_raw.name,
                             gender: actor_raw.gender,
                             age: actor_raw.age,
-                            location: actor_raw.location,
                             bio: actor_raw.bio,
                             picture: actor_raw.picture
                         },

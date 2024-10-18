@@ -6,13 +6,12 @@ block content
       .ui.info.message
         .content
           .header
-            | Please go to the survey.
-          ul.list
-            li To earn your SONA credit, you should complete the survey 
-              a(href=endSurveyLink, style="text-decoration: underline; color: red;") HERE
+            | You did this!🎉🎉
+          p Now we want to ask you some additional questions. Please click
+              a(href=endSurveyLink, style="text-decoration: underline; color: red;")  HERE
               | .
   .computer.only.tablet.only.eight.wide.column
-    img.ui.fluid.image(src=process.env.SITE_PICTURE)
+    img.ui.fluid.image(src=process.env.SITE_PICTURE,style="height: 500px; object-fit: cover;")
 
   .eight.wide.computer.eight.wide.tablet.sixteen.wide.mobile.column
     .ui.card.fluid(style="padding: 20px; margin-top: 90px;")

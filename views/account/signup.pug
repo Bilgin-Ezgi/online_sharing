@@ -2,7 +2,7 @@ extends ../ui_layout
 
 block content
   .computer.only.tablet.only.eight.wide.column
-    img.ui.fluid.image(src=process.env.SITE_PICTURE)
+    img.ui.fluid.image(src=process.env.SITE_PICTURE, style="height: 500px; object-fit: cover;")
   .eight.wide.computer.eight.wide.tablet.sixteen.wide.mobile.column
     .ui.card.fluid(style="padding: 20px; margin-top: 90px;")
       h2.ui.header Sign Up
@@ -26,13 +26,9 @@ block content
           span(style="color: green; visibility:hidden; display: inline-block;")#passwordsMatch  
             i.icon.check 
             | Passwords Match
-        .field
-          .ui.checkbox
-            input(type='checkbox', name='tos', tabindex="0", id='tos', required)
-            label(for='tos')
-              | I agree to the 
-              a(href='/tos', target="_blank") Terms and Conditions.
-        button.ui.large.button(type='submit') Sign Up
+        
+              
+        button.ui.large.button(type='submit') Save
 
 block scripts
   script(src='/public/js/profile.js')

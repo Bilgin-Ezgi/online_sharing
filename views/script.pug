@@ -16,7 +16,7 @@ block content
           img.ui.avatar.image(src='/user_avatar/'+user.profile.picture)
         else
           img.ui.avatar.image(src=user.gravatar(60))
-      input(readonly, type='text', placeholder='Create a new post. You will share two posts in total.')
+      input(readonly, type='text', placeholder='Click to create a new post', style="font-size: 15px; height: 45px;")
       i.big.photo.link.icon
     each val in script
       if val.relativeTime 
@@ -33,7 +33,15 @@ block content
     
   .ui.tiny.post.modal
     i.close.icon
-    .header Create a post about an important event that you experienced and photographed in the past week. It should be a specific one-time event that occurred at a particular time and place. Describe the event in as much detail as possible.  
+    .header
+     | Create two posts: one about a challenging event and one about a joyous event you recently experienced with your friends.
+     br 
+     li Each post should focus on one event.
+     li Share what happened in as much detail as you can.
+     li This is one of the posts. If you haven't shared the second post yet, please do so after submitting this one
+     
+     
+
     .scrolling.content
       form#postform.ui.feed.form(action='/post/new', method='POST', enctype='multipart/form-data')
         input(type='hidden', name='_csrf', value=_csrf)

@@ -2,31 +2,28 @@ extends ui_layout
 
 block content
   .ui.text.container(style="margin-top: 2em; margin-bottom: 2em")
-    h2(style="text-align: center;") Welcome to Memento
-    p Memento is a new social media platform where you can share your important moments and connect with others. 
+    h2(style="text-align: center;") Welcome to Me & My Friends
+    p Me & My Friends is a new social media platform designed specifically for teens. We aim to provide a trusted space where you can share important moments and connect with your friends. 
 
       h3 Here is what you can do on the site.  
     ul
-        li Fill out your profile and add as many details as you would like others to know about you.
         li Check who else is around. Like or reply to others’ posts. 
         li Create new posts.
        
-    p Before you get started, please review our community rules. These rules help foster a friendly community. Please note that this is not a comprehensive list. Our moderators reserve the right to remove anything we deem inappropriate.
+    p Before you get started, please review our community rules. These rules help foster a safe community. Our moderators reserve the right to remove anything we deem inappropriate.
 
 
     h3 No Personal Attacks and Bullying
-    p Zero tolerance on this! Memento is a place to to share our important moments, not to tear each other down. 
+    p Zero tolerance on this! Me & My Friends is a place to share our important moments, not to tear each other down. 
 
-    h3 No Racism, Sexism, and Other Discrimination
+    h3 No Discrimination
     p Attacking entire classes of people is just like attacking a single person: we'll ban you for it.
 
-    h3 No NSFW Material
-    p If you wouldn't show your boss, don't show it here! 
 
     if !user.consent
       .ui.big.green.labeled.icon.button.info
           i.rocket.icon
-          |   Got it! Continue to fill out my profile
+          |   Gotcha! 
   
   script.
     $('.ui.big.green.labeled.icon.button.info').on('click', function() {
