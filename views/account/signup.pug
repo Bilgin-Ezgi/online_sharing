@@ -4,23 +4,23 @@ block content
   .computer.only.tablet.only.eight.wide.column
     img.ui.fluid.image(src=process.env.SITE_PICTURE, style="height: 500px; object-fit: cover;")
   .eight.wide.computer.eight.wide.tablet.sixteen.wide.mobile.column
-    .ui.card.fluid(style="padding: 20px; margin-top: 90px;")
+    .ui.card.fluid(style="padding: 20px; margin-top: 90px;font-size: 17px")
       h2.ui.header Sign Up
       form.ui.form(id='signup-form', action='/signup', method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
         .field
-          label(for='username') Username
+          label(for='username',style= "font-size: 17px") Username
           input(type='text', name='username', id='username', placeholder='Username', autofocus, required)
         .field
-          label(for='email') Email (will not be publicly displayed)
+          label(for='email',style= "font-size: 17px") Email (will not be publicly displayed)
           input(type='email', name='email', id='email', placeholder='Email', required)
         .field
-          label(for='password') Password
+          label(for='password',style= "font-size: 17px") Password
           input(type='password', name='password', id='password', placeholder='Password', minlength="4", required)
         .field
-          label(for='confirmPassword') Confirm Password 
+          label(for='confirmPassword',style= "font-size: 17px") Confirm Password 
           input(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', minlength="4", required)
-          span(style="color: green; visibility:hidden; display: inline-block;")#passwordsMatch  
+          span(style="color: green; visibility:hidden; display: inline-block; font-size: 17px")#passwordsMatch  
             i.icon.check 
             | Passwords Match
         
