@@ -1,13 +1,13 @@
 extends ../ui_layout
 
 block content
-  .twelve.wide.computer.tablet.sixteen.wide.mobile.column(style="margin-top: 2em; margin-bottom: 2em;")
-    h2(style="text-align: center;") What would you like to tell others about yourself?
+  .twelve.wide.computer.tablet.sixteen.wide.mobile.column(style="margin-top: 2em; margin-bottom: 2em")
+    h2(style="text-align: center; font-size: 18px") What would you like to tell others about yourself?
 
     form.ui.large.form(action='/account/signup_info_post', method='POST', enctype='multipart/form-data')
       input(type='hidden', name='_csrf', value=_csrf)
       .field.image-upload
-        p(style="font-weight: bold; font-size: medium; margin-bottom: 0.2em")  
+        p(style="font-weight: bold; font-size:18px; margin-bottom: 0.2em")  
           span(style="font-weight: normal") 
         label(for='picinput', style="width: fit-content")
           if user.profile.picture
@@ -15,16 +15,16 @@ block content
         input#picinput(type='file', accept='image/*', capture='camera', name='picinput')
       .inline.fields(style='padding-top: 10px !important;')
         .six.wide.field
-          label(for='name') Username
+          label(for='name', style="font-size: 18px") Username
           input.form-control(type='text', name='name', id='name', value=user.profile.name)
       .six.wide.field
-          label(for='location') What’s your favorite music?
+          label(for='location',style="font-size: 18px") What’s your favorite music?
           input.form-control(type='text', name='location', id='location', value=user.profile.location)
       .six.wide.field
-          label(for='location') What’s your favorite dessert?
+          label(for='location',style="font-size: 18px") What’s your favorite dessert?
           input.form-control(type='text', name='location', id='location', value=user.profile.location)
       .six.wide.field
-        label(for='bio') What’s your favorite hobby?  
+        label(for='bio', style="font-size: 18px") What’s your favorite hobby?  
         textarea(type='text',rows='1', columns = '1', name='bio', id='bio')=user.profile.bio
       .ui.buttons
         button.ui.large.positive.button(type='submit') Save
