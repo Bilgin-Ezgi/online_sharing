@@ -96,9 +96,9 @@ $(window).on("load", function() {
         }
     }
 
-    $("#picinput").change(function() {
-        readURL(this);
-    });
+    // $("#picinput").change(function() {
+    //     readURL(this);
+    // });
 
     // Lazy loading of images on site
     $(`#content .fluid.card .img img, #content img.ui.avatar.image, #content a.avatar img`).visibility({

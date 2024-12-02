@@ -49,7 +49,7 @@ async function addAdminToDB() {
         active: true,
         isAdmin: true,
         createdAt: currDate,
-        mturkID: username,
+        // mturkID: username,
         consent: true
     });
     try {

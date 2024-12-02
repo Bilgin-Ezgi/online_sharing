@@ -25,8 +25,6 @@ const userSchema = new mongoose.Schema({
     createdAt: Date, // Absolute Time the user was created
     consent: { type: Boolean, default: false }, // Indicates if user has proceeded through the Welcome & community rule pages
 
-    mturkID: { type: String, unique: true }, // MTurkID
-
     experimentalCondition: String, // Indicates the experimental condition user is assigned to. Values are defined in the .env file by the variable EXP_CONDITIONS_NAMES and assigned at account creation in the users controller.
 
     blocked: [String], // List of usernames of actors user has blocked
@@ -52,6 +50,7 @@ const userSchema = new mongoose.Schema({
         picture: String, // Picture (file path) for post
         liked: { type: Boolean, default: false }, // Indicates if the user has liked the post
         likes: { type: Number, default: 0 }, // Indicates the number of likes on the post by actors (excludes the user's own like)
+        label: {type: String}, // Label for the post ("joyous", "challenging")
 
         // Comments on post
         comments: [new Schema({

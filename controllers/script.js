@@ -76,7 +76,7 @@ exports.newPost = async(req, res) => {
         const user = await User.findById(req.user.id).exec();
         user.numPosts = user.numPosts + 1; // Count begins at 0
         const currDate = Date.now();
-
+        console.log(req.body.label);
         let post = {
             type: "user_post",
             postID: user.numPosts,
@@ -84,6 +84,7 @@ exports.newPost = async(req, res) => {
             picture: "",
             liked: false,
             likes: 0,
+            label: req.body.label,
             comments: [],
             absTime: currDate,
             relativeTime: currDate - user.createdAt,

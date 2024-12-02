@@ -10,11 +10,8 @@ block content
         label(for='email') Email
         input.form-control(type='email', name='email', id='email', value=user.email)
       .field
-        label(for='name') Name
+        label(for='name') Username
         input.form-control(type='text', name='name', id='name', value=user.profile.name)
-      .field
-        label(for='bio') What is your favorite animal?
-        textarea(rows='2', name='bio', id='bio')=user.profile.bio
       button.ui.large.button(type='submit') Update Profile
     .ui.divider
     h3.ui.header(style="margin-top: 2em;") Change Password

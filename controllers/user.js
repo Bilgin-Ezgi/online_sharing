@@ -70,15 +70,12 @@ exports.logout = async(req, res) => {
     try {
         const user = await User.findById(req.user.id).exec();
         const endSurveyLink = user.endSurveyLink;
-        user.active = false;
-        await user.save();
-
         req.logout((err) => {
             if (err) console.log('Error : Failed to logout.', err);
             req.session.destroy((err) => {
                 if (err) console.log('Error : Failed to destroy the session during logout.', err);
                 req.user = null;
-                res.redirect(`/login?end=${endSurveyLink}`);
+                res.redirect(endSurveyLink);
             });
         });
     } catch (err) {
@@ -115,9 +112,10 @@ exports.postSignup = async(req, res, next) => {
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
     try {
-        const existingUser = await User.findOne({ $or: [{ email: req.body.email }, { mturkID: req.body.mturkID }] }).exec();
+        const existingUser = await User.findOne({ email: req.body.email }).exec();
+        console.log(existingUser)
         if (existingUser) {
-            req.flash('errors', { msg: 'An account with that email address or Code number already exists.' });
+            req.flash('errors', { msg: 'An account with that email address already exists.' });
             return res.redirect('/signup');
         }
         /*###############################
@@ -132,13 +130,12 @@ exports.postSignup = async(req, res, next) => {
         const user = new User({
             email: req.body.email,
             password: req.body.password,
-            mturkID: req.body.mturkID,
             username: req.body.username,
             experimentalCondition: experimentalCondition,
             endSurveyLink: surveyLink,
             active: true,
             lastNotifyVisit: currDate,
-            createdaT: currDate
+            createdAt: currDate
         });
         await user.save();
         req.logIn(user, (err) => {
@@ -151,6 +148,7 @@ exports.postSignup = async(req, res, next) => {
             res.redirect('/com');
         });
     } catch (err) {
+        console.log(err);
         next(err);
     }
 };
@@ -169,7 +167,7 @@ exports.postSignupInfo = async(req, res, next) => {
         }
 
         await user.save();
-        req.flash('success', { msg: 'Profile information has been updated.' });
+        req.flash('success', { msg: 'Profile information has been saved.' });
         return res.redirect('/info');
     } catch (err) {
         next(err);
@@ -238,7 +236,7 @@ exports.postUpdateProfile = async(req, res, next) => {
         }
 
         await user.save();
-        req.flash('success', { msg: 'Profile information has been updated.' });
+        req.flash('success', { msg: 'Profile information has been saved.' });
         res.redirect('/account');
     } catch (err) {
         if (err.code === 11000) {

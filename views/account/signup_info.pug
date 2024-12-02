@@ -15,10 +15,13 @@ block content
         input#picinput(type='file', accept='image/*', capture='camera', name='picinput')
       .inline.fields(style='padding-top: 10px !important;')
         .six.wide.field
-          label(for='name') Name
+          label(for='name') Username
           input.form-control(type='text', name='name', id='name', value=user.profile.name)
       .six.wide.field
           label(for='location') What’s your favorite music?
+          input.form-control(type='text', name='location', id='location', value=user.profile.location)
+      .six.wide.field
+          label(for='location') What’s your favorite dessert?
           input.form-control(type='text', name='location', id='location', value=user.profile.location)
       .six.wide.field
         label(for='bio') What’s your favorite hobby?  

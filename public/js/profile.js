@@ -28,7 +28,7 @@ $(window).on("load", function() {
 
     function enableSaveBtn() {
         let isFilled = true;
-        // Check Username and MTurkID is not blank
+        // Check Username is not blank
         $('input[type="text"]').each(function(index) {
                 if ($(this).val().trim().length === 0) {
                     isFilled = false;
@@ -37,10 +37,6 @@ $(window).on("load", function() {
             })
             // Check email is valid
         if ($('input[type="email"]').is(":invalid")) {
-            isFilled = false;
-        }
-        // Check TOS is checked
-        if (!$('.ui.checkbox').hasClass("checked")) {
             isFilled = false;
         }
         // Check passwords match and password is longer than 4

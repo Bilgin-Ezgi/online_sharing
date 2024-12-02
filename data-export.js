@@ -55,8 +55,9 @@ async function getDataExport() {
        // { id: 'NumActorPostsFlagged', title: 'NumActorPostsFlagged' },
         { id: 'NumActorCommentsLiked', title: 'NumActorCommentsLiked' },
        // { id: 'NumActorCommentsFlagged', title: 'NumActorCommentsFlagged' },
-        { id: 'UserPostsCreated', title: 'UserPostsCreated' },
-        { id: 'PhotoName', title: 'PhotoName'},
+        { id: 'UserPostsCreatedJoyous', title: 'UserPostsCreated - Joyous' },
+        { id: 'UserPostsCreatedChallenging', title: 'UserPostsCreated - Challenging' },
+        // { id: 'PhotoName', title: 'PhotoName'},
         { id: 'UserCommentsCreated', title: 'UserCommentsCreated' },
         { id: 'ActorPostsLiked', title: 'ActorPostsLiked' },
        // { id: 'ActorPostsFlagged', title: 'ActorPostsFlagged' },
@@ -78,21 +79,28 @@ async function getDataExport() {
     // For each user
     for (const user of users) {
         const record = {}; //Record for the user
-        record.Id = user.mturkID;
+        // record.Id = user.mturkID;
         record.Username = user.username;
         record.Condition = user.group;
 
-        let userPostsCreated = "";
-        let photoNameCreated = "";
+        let userPostsCreated_joyous = "";
+        let userPostsCreated_challenging = "";
+        // let photoNameCreated = "";
         for (const userPost of user.posts) {
             let string = userPost.body + (userPost.picture ? " w/ PHOTO: " + userPost.picture : "") + ", on Day " + (Math.floor(userPost.relativeTime / 86400000) + 1) + "\r\n";
-            let string_photo = userPost.picture + "\r\n"; 
-            userPostsCreated += string;
-            photoNameCreated += string_photo;
+            // let string_photo = userPost.picture + "\r\n"; 
+            if (userPost.label == "joyous"){
+                userPostsCreated_joyous += string;
+                // photoNameCreated += string_photo;
+            } else if (userPost.label == "challenging") {
+                userPostsCreated_challenging += string;
+            }
+            // photoNameCreated += string_photo;
         }
         record.NumUserPostsCreated = user.posts.length;
-        record.UserPostsCreated = userPostsCreated;
-        record.PhotoName = photoNameCreated;
+        record.UserPostsCreatedJoyous = userPostsCreated_joyous;
+        record.UserPostsCreatedChallenging = userPostsCreated_challenging;
+        // record.PhotoName = photoNameCreated;
 
         let NumActorPostsLiked = 0,
           //  NumActorPostsFlagged = 0,
