@@ -70,12 +70,12 @@ exports.logout = async(req, res) => {
     try {
         const user = await User.findById(req.user.id).exec();
         const endSurveyLink = user.endSurveyLink;
+        console.log(endSurveyLink);
         req.logout((err) => {
             if (err) console.log('Error : Failed to logout.', err);
             req.session.destroy((err) => {
                 if (err) console.log('Error : Failed to destroy the session during logout.', err);
                 req.user = null;
-                alert(endSurveyLink);
                 res.redirect(endSurveyLink);
             });
         });
