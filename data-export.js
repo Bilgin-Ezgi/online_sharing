@@ -49,7 +49,7 @@ async function getDataExport() {
         { id: 'Id', title: process.env.IDENTIFIER },
         { id: 'Username', title: "Username" },
         { id: 'Condition', title: 'Condition' },
-        { id: 'email', title: "email" },
+        { id: 'email', title: 'email' },
         { id: 'NumUserPostsCreated', title: 'NumUserPostsCreated' },
         { id: 'NumUserCommentsCreated', title: 'NumUserCommentsCreated' },
         { id: 'NumActorPostsLiked', title: 'NumActorPostsLiked' },
