@@ -42,7 +42,9 @@ block content
   .ui.tiny.post.modal#newpost-modal
     i.close.icon
     .header.modal-header
-     | Make a post about a joyous event that you recently experienced with your friends. Share what happened in as much detail as you can. Make sure to provide at least eight details. 
+     | Make a post about a joyous event that you recently experienced with your friends. 
+     p Share what happened in as much detail as you can.  
+     p Provide at least eight details. 
     .scrolling.content
       form#postform.ui.feed.form(action='/post/new', method='POST', enctype='multipart/form-data')
         input(type='hidden', name='_csrf', value=_csrf)
@@ -55,7 +57,9 @@ block content
   .ui.tiny.post.modal#secondpost-modal
     i.close.icon
     .header.modal-header
-     | Make a post about a challenging event that you recently experienced with your friends. Share what happened in as much detail as you can. Make sure to provide at least eight details. 
+     | Make a post about a challenging event that you recently experienced with your friends. 
+     p Share what happened in as much detail as you can. 
+     p Provide at least eight details. 
     .scrolling.content
       form#postform2.ui.feed.form(action='/post/new', method='POST', enctype='multipart/form-data')
         input(type='hidden', name='_csrf', value=_csrf)
