@@ -16,7 +16,8 @@ exports.getLogin = (req, res) => {
     res.render('account/login', {
         title: 'Login',
         site_picture: process.env.SITE_PICTURE,
-        endSurveyLink: endSurveyLink
+        endSurveyLink: endSurveyLink, 
+        r_id: req.query.r_id
     });
 };
 
@@ -93,7 +94,8 @@ exports.getSignup = (req, res) => {
         return res.redirect('/');
     }
     res.render('account/signup', {
-        title: 'Create Account'
+        title: 'Create Account', 
+        r_id: req.query.r_id
     });
 };
 
@@ -126,7 +128,7 @@ exports.postSignup = async(req, res, next) => {
         const experimentalConditionNames = process.env.EXP_CONDITIONS_NAMES.split(",");
         const experimentalCondition = experimentalConditionNames[Math.floor(Math.random() * numConditions)];
 
-        const surveyLink = process.env.POST_SURVEY;
+        const surveyLink = process.env.POST_SURVEY ? process.env.POST_SURVEY + (process.env.POST_SURVEY_WITH_QUALTRICS == 'TRUE' && process.env.POST_SURVEY.includes("?r_id=") && req.query.r_id!=undefined ? req.query.r_id : "") : "";
         const currDate = Date.now();
         const user = new User({
             email: req.body.email,
@@ -138,6 +140,9 @@ exports.postSignup = async(req, res, next) => {
             lastNotifyVisit: currDate,
             createdAt: currDate
         });
+        if (req.query.r_id) { 
+            user.ResponseID = req.query.r_id;
+        }
         await user.save();
         req.logIn(user, (err) => {
             if (err) {

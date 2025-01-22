@@ -80,7 +80,7 @@ async function getDataExport() {
     // For each user
     for (const user of users) {
         const record = {}; //Record for the user
-        // record.Id = user.mturkID;
+        record.Id = user.ResponseID;
         record.Username = user.username;
         record.Condition = user.group;
 
