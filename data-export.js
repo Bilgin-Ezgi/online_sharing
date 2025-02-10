@@ -46,7 +46,7 @@ async function getDataExport() {
         `.${currentDate.getHours()}-${currentDate.getMinutes()}-${currentDate.getSeconds()}`;
     const outputFilepath = `./outputFiles/${outputFilename}.csv`;
     const csvWriter_header = [
-        { id: 'Id', title: process.env.IDENTIFIER },
+        { id: 'Id', title: "Responsd ID"},
         { id: 'Username', title: "Username" },
         { id: 'Condition', title: 'Condition' },
         { id: 'email', title: 'email' },
