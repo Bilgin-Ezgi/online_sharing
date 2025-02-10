@@ -25,6 +25,10 @@ block content
         else
           img.ui.avatar.image(src=user.gravatar(60))
       input(readonly, type='text', placeholder='Click to create a new post about a challenging event', style="font-size: 18px; height: 55px;font-weight: bold; color: #333333; background-color: #ffffff; border: 1px solid #dddddd; padding: 12px; width: 100%")
+    //- Input for creating new post at top of feed
+    #thirdpost.ui.fluid.left.labeled.right.icon.input
+      .ui.label
+      input(readonly, type='text', placeholder='After you share two posts, click to End my Session at the top right of the page and go to the post survey', style="font-size: 10px; height: 45px;font-weight: bold; color: #333333; background-color: #ffffff; border: 1px solid #dddddd; padding: 12px; width: 100%")   
 
     each val in script
       if val.relativeTime 
@@ -66,6 +70,8 @@ block content
           textarea(rows='8', placeholder='Type here', name='body')
     .actions
       input.ui.green.button(type='submit', form='postform2', value='Share')
+
+        
 block scripts
   script().
     let numComments = !{JSON.stringify(user.numComments)};
