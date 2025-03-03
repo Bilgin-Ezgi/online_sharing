@@ -20,11 +20,15 @@ block content
     //- Input for creating new post at top of feed
     #secondpost.ui.fluid.left.labeled.right.icon.input
       .ui.label
-        if user.profile.picture
+       if user.profile.picture
           img.ui.avatar.image(src='/user_avatar/'+user.profile.picture)
-        else
+       else
           img.ui.avatar.image(src=user.gravatar(60))
       input(readonly, type='text', placeholder='Click to create a new post about a challenging event', style="font-size: 18px; height: 55px;font-weight: bold; color: #333333; background-color: #ffffff; border: 1px solid #dddddd; padding: 12px; width: 100%")
+    //- Input for creating new post at top of feed
+    #thirdpost.ui.fluid.left.labeled.right.icon.input
+      .ui.label
+      textarea(readonly, placeholder="After you've created two posts, click on your profile icon in the top right, and select 'End my Session' from the dropdown" style="font-size: 18px; font-weight: bold; color:#000000; background-color: #ffffff; border: 1px solid #dddddd;height: 90px; padding: 12px;width: 100%; text-align: center; display: flex; align-items: center; justify-content: center;")
 
     each val in script
       if val.relativeTime 
