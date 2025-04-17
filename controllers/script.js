@@ -92,7 +92,14 @@ exports.newPost = async(req, res) => {
         };
 
         // Find any Actor replies (comments) that go along with this post
-        const actor_replies = await Notification.find()
+        // const actor_replies = await Notification.find()
+        //     .where('userPostID').equals(post.postID)
+        //     .where('notificationType').equals('reply')
+        //     .populate('actor').exec();
+
+        const actor_replies = await Notification.find({
+                class: { "$in": ["", req.body.label] }
+            })
             .where('userPostID').equals(post.postID)
             .where('notificationType').equals('reply')
             .populate('actor').exec();
