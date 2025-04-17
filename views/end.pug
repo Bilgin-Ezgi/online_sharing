@@ -1,0 +1,19 @@
+extends ui_layout
+
+block content
+  .ui.text.container(style="margin-top: 4em; margin-bottom: 4em; font-size: 18px")
+    
+    
+    p If you've created two posts, you can end your session. <strong>You will be directed to a survey to answer some questions.</strong></p>
+    p Otherwise, please go back and create two posts.
+    
+
+    
+      .ui.big.green.labeled.icon.button.info
+          i.rocket.icon
+          |   End my session
+  
+  script.
+    $('.ui.big.green.labeled.icon.button.info').on('click', function() {
+        window.location.href='/logout'; 
+      });

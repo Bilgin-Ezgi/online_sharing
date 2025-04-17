@@ -1,0 +1,47 @@
+extends ui_layout
+
+block content
+  .ui.text.container(style="margin-top: 4em; margin-bottom: 4em;")
+    h1(style="text-align: center;font-size: 16.5px") 
+     
+    h3 On the next page, you can start posting. You'll also see posts made by others. 
+    
+
+    
+    h3 For your posts, think about a challenging event and a joyous event that you recently experienced with your friends. 
+
+
+
+    h3 At the top of the next page, you'll see two textboxes. Make a post for each event by clicking on the relevant textbox. 
+   
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .ui.big.green.labeled.icon.button.interest
+        i.rocket.icon
+        |   Let's start posting!
+
+    script.
+        $('.ui.big.green.labeled.icon.button.interest').on('click', function() {
+            $(this).addClass('loading disabled');
+            $.post("/account/consent", {
+                    _csrf: $('meta[name="csrf-token"]').attr('content')
+                }).done(function(json) {
+                    if (json["result"] === "success") {
+                        window.location.href = '/'
+                    }
+                });
+        });
