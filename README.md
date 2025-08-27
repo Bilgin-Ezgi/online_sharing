@@ -2,7 +2,7 @@ The Truman Platform 2.0
 =======================
 _Updated version of The Truman Platform https://github.com/cornellsml/truman_ 
 
-Named after the 1998 film, The Truman, **The Truman Platform** is a social media simulation platform created by [The Cornell Social Media Lab](https://socialmedialab.cornell.edu/) to provide researchers a community research infrastructure to conduct social media experiments in ecologically-valid realistic environments. Researchers can create different social media environments with a repertoire of features and affordances that fit their research goals and purposes, while ensuring participants have a naturalistic social media experience. 
+Named after the 1998 film, The Truman Show, **The Truman Platform** is a social media simulation platform created by [The Cornell Social Media Lab](https://socialmedialab.cornell.edu/) to provide researchers a community research infrastructure to conduct social media experiments in ecologically-valid realistic environments. Researchers can create different social media environments with a repertoire of features and affordances that fit their research goals and purposes, while ensuring participants have a naturalistic social media experience. 
 
 This project and software development was supported by the National Science Foundation through IIS-1405634. Special thanks to everyone at Cornell Social Media Lab in the Department of Communication. 
 
