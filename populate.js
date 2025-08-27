@@ -169,10 +169,10 @@ async function doPopulate() {
                             postID: new_post.id,
                             body: new_post.body,
                             picture: new_post.picture,
-                            likes: getLikes(),
                             actor: act,
                             time: timeStringToNum(new_post.time) || null,
-                            class: new_post.class
+                            class: new_post.class,
+                            likes: parseInt(new_post.likes, 10) || getLikes(),
                         }
 
                         const script = new Script(postdetail);
@@ -216,7 +216,7 @@ async function doPopulate() {
                             const comment_detail = {
                                 commentID: new_reply.id,
                                 body: new_reply.body,
-                                likes: getLikesComment(),
+                                likes: new_reply.likes || getLikesComment(),
                                 actor: act,
                                 time: timeStringToNum(new_reply.time),
                                 class: new_reply.class
