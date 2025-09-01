@@ -18,13 +18,13 @@ block content
           img.ui.avatar.image(src=user.gravatar(60))
       input(readonly, type='text', placeholder='Click to create a new post about a joyous event', style="font-size: 18.5px; height: 55px;font-weight: bold; color: #333333; background-color: #ffffff; border: 1px solid #dddddd; padding: 12px; width: 100%")
     //- Input for creating new post at top of feed
-    #secondpost.ui.fluid.left.labeled.right.icon.input
-      .ui.label
-       if user.profile.picture
-          img.ui.avatar.image(src='/user_avatar/'+user.profile.picture)
-       else
-          img.ui.avatar.image(src=user.gravatar(60))
-      input(readonly, type='text', placeholder='Click to create a new post about a challenging event', style="font-size: 18.5px; height: 55px;font-weight: bold; color: #333333; background-color: #ffffff; border: 1px solid #dddddd; padding: 12px; width: 100%")
+    //- #secondpost.ui.fluid.left.labeled.right.icon.input
+    //-   .ui.label
+    //-    if user.profile.picture
+    //-       img.ui.avatar.image(src='/user_avatar/'+user.profile.picture)
+    //-    else
+    //-       img.ui.avatar.image(src=user.gravatar(60))
+    //-   input(readonly, type='text', placeholder='Click to create a new post about a challenging event', style="font-size: 18.5px; height: 55px;font-weight: bold; color: #333333; background-color: #ffffff; border: 1px solid #dddddd; padding: 12px; width: 100%")
     //- Input for creating new post at top of feed
     #thirdpost.ui.fluid.left.labeled.right.icon.input
       .ui.label
@@ -57,19 +57,19 @@ block content
     .actions
       input.ui.green.button(type='submit', form='postform', value='Share')
   
-  .ui.tiny.post.modal#secondpost-modal
-    i.close.icon
-    .header.modal-header
-     | Make a post about a challenging event that you recently experienced with your friends. 
-     p Share what happened in as much detail as you can. Describe the event in 8 to 10 sentences. 
-    .scrolling.content
-      form#postform2.ui.feed.form(action='/post/new', method='POST', enctype='multipart/form-data')
-        input(type='hidden', name='_csrf', value=_csrf)
-        input(type='hidden', name='label', value="challenging")
-        .field
-          textarea(rows='8', placeholder='Type here', name='body')
-    .actions
-      input.ui.green.button(type='submit', form='postform2', value='Share')
+  //- .ui.tiny.post.modal#secondpost-modal
+  //-   i.close.icon
+  //-   .header.modal-header
+  //-    | Make a post about a challenging event that you recently experienced with your friends. 
+  //-    p Share what happened in as much detail as you can. Describe the event in 8 to 10 sentences. 
+  //-   .scrolling.content
+  //-     form#postform2.ui.feed.form(action='/post/new', method='POST', enctype='multipart/form-data')
+  //-       input(type='hidden', name='_csrf', value=_csrf)
+  //-       input(type='hidden', name='label', value="challenging")
+  //-       .field
+  //-         textarea(rows='8', placeholder='Type here', name='body')
+  //-   .actions
+  //-     input.ui.green.button(type='submit', form='postform2', value='Share')
 
         
 block scripts
