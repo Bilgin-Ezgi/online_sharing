@@ -49,24 +49,33 @@ block content
               when 'like'
                 - var best = notification.actors.splice(0, 5);
                 .event
+                  //- .label
+                    //- i.large.like.icon
+                  .content
+                    //- img.ui.tiny.right.floated.rounded.image(src='/user_post/'+notification.picture)
+                    .summary
+                      h2.ui.header
+                        |  You got above the average number of likes!
+                .event
                   .label
                     i.large.like.icon
                   .content
                     //- img.ui.tiny.right.floated.rounded.image(src='/user_post/'+notification.picture)
-                    .extra.images
-                      each actor in best
-                        a.ui.avatar.image(href='/user/'+actor.username, data-tooltip=actor.profile.name, data-position='bottom center')                       
-                          img.ui.avatar.image(src='/public/picture.svg', data-src='/profile_pictures/'+actor.profile.picture)
+                    //- .extra.images
+                    //-   each actor in best
+                    //-     a.ui.avatar.image(href='/user/'+actor.username, data-tooltip=actor.profile.name, data-position='bottom center')                       
+                    //-       img.ui.avatar.image(src='/public/picture.svg', data-src='/profile_pictures/'+actor.profile.picture)
                     .summary
-                      a(href='/user/'+best[0].username)=best[0].profile.name
-                      if best.length != 1
-                        |  and 
-                        a.others(key=notification.key)=(best.length+notification.actors.length-1)+" others"
-                        |  have
-                      else 
-                        |  has
-                      |  liked your post. 
-                      .date=notification.time
+                      h3.ui.header
+                        a(href='/user/'+best[0].username)=best[0].profile.name
+                        if best.length != 1
+                          |  and 
+                          a.others(key=notification.key)=(best.length+notification.actors.length-1)+" others"
+                          |  have
+                        else 
+                          |  has
+                        |  liked your post.
+                        .date=notification.time
               when 'reply'
                 .event
                   .label
