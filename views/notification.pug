@@ -28,7 +28,7 @@ block content
                   .label
                     i.large.unhide.icon
                   .content
-                    img.ui.tiny.right.floated.rounded.image(src='/user_post/'+notification.picture)
+                    //- img.ui.tiny.right.floated.rounded.image(src='/user_post/'+notification.picture)
                     .extra.images
                       each actor in best
                         if actor.username != "generic-joe"
@@ -37,14 +37,14 @@ block content
                     if best.length == 1
                       .summary
                         a(href='/user/'+best[0].username)=best[0].profile.name
-                        |   has read your post. 
+                        |   has commented on your post. 
                         .date=notification.time
                     else 
                       .summary
                         a(href='/user/'+best[0].username)=best[0].profile.name
                         |  and 
                         a(key=notification.key)=(best.length+notification.actors.length-1)+" others "
-                        | have read your post.  
+                        | have commented on your post.  
                         .date=notification.time
               when 'like'
                 - var best = notification.actors.splice(0, 5);
@@ -52,7 +52,7 @@ block content
                   .label
                     i.large.like.icon
                   .content
-                    img.ui.tiny.right.floated.rounded.image(src='/user_post/'+notification.picture)
+                    //- img.ui.tiny.right.floated.rounded.image(src='/user_post/'+notification.picture)
                     .extra.images
                       each actor in best
                         a.ui.avatar.image(href='/user/'+actor.username, data-tooltip=actor.profile.name, data-position='bottom center')                       
@@ -72,7 +72,7 @@ block content
                   .label
                     i.large.reply.icon
                   .content
-                    img.ui.tiny.right.floated.rounded.image(src='/user_post/'+notification.picture)
+                    //- img.ui.tiny.right.floated.rounded.image(src='/user_post/'+notification.picture)
                     .extra.images
                         a.ui.avatar.image(href='/user/'+notification.actor.username, data-tooltip=notification.actor.profile.name, data-position='bottom center')                       
                           img.ui.avatar.image(src='/public/picture.svg', data-src='/profile_pictures/'+notification.actor.profile.picture)
@@ -81,7 +81,7 @@ block content
                         span=notification.actor.profile.name
                       |  has commented on your post.
                       .date=notification.time
-                    .extra.text=notification.replyBody
+                    .extra.text=""
               when 'reply_read'
                 - var best = notification.actors.splice(0, 5);
                 .event
