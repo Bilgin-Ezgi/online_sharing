@@ -55,7 +55,7 @@ block content
                     //- img.ui.tiny.right.floated.rounded.image(src='/user_post/'+notification.picture)
                     .summary
                       h2.ui.header
-                        |  You got above the average number of likes!
+                        |  Your post has received above the average number of likes!
                 .event
                   .label
                     i.large.like.icon
@@ -67,12 +67,11 @@ block content
                     //-       img.ui.avatar.image(src='/public/picture.svg', data-src='/profile_pictures/'+actor.profile.picture)
                     .summary
                       h3.ui.header
-                        a(href='/user/'+best[0].username)=best[0].profile.name
                         if best.length != 1
-                          |  and 
-                          a.others(key=notification.key)=(best.length+notification.actors.length-1)+" others"
+                          a.others(key=notification.key)=(best.length+notification.actors.length)+" people"
                           |  have
-                        else 
+                        else
+                          a.others(key=notification.key)=(best.length+notification.actors.length)+" person" 
                           |  has
                         |  liked your post.
                         .date=notification.time

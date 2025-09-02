@@ -11,6 +11,7 @@
           if user.consent
             a.item(href='/notifications') 
               i.big.alarm.icon
+              | Notifications
           .ui.simple.dropdown.item
             if user.profile.picture
               img.ui.mini.spaced.circular.image(src='/user_avatar/'+user.profile.picture)
