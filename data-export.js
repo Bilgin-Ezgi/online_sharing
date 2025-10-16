@@ -47,10 +47,10 @@ async function getDataExport() {
     const outputFilepath = `./outputFiles/${outputFilename}.csv`;
     const csvWriter_header = [
         { id: 'Id', title: "Responsd ID"},
-        { id: 'Username', title: "Username" },
+        { id: 'Username', title: "SONA ID" },
         { id: 'Condition', title: 'Condition' },
         { id: 'email', title: 'email' },
-        { id: 'NumUserPostsCreated', title: 'NumUserPostsCreated' },
+        { id: 'NumUserPostsCreated', title: 'NumUserPostsCreated_High' },
         { id: 'NumUserCommentsCreated', title: 'NumUserCommentsCreated' },
         { id: 'NumActorPostsLiked', title: 'NumActorPostsLiked' },
        // { id: 'NumActorPostsFlagged', title: 'NumActorPostsFlagged' },

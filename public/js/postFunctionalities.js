@@ -214,7 +214,7 @@ function followUser(e) {
     if (target.text().trim() == "Follow") { //Follow Actor
         $(`.ui.basic.primary.follow.button[actor_un='${username}']`).each(function(i, element) {
             const button = $(element);
-            button.text("Following");
+            button.text("Requested");
             button.prepend("<i class='check icon'></i>");
         })
         $.post("/user", {
